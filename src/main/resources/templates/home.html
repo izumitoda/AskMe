@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+${name}
+${sex ? if_exists}
+<#if band?exists>
+<#list band as key><#if (key_index==2)>
+<#break></#if>
+${key}
+${key_index}
+
+
+<br>
+</#list>
+</#if>
+<#if map?exists>
+<#list map?keys as key>
+<#if (key=="1")>
+<#else>
+${key}
+${map[key]}
+</#if>
+</#list>
+</#if>
+User: ${user.name}
+Description; ${user.getDescription()}
+<#assign title="kfldsa">
+<#-- 注释 -->
+<#include "head.html" />
+${title}
+</body>
+</html>
