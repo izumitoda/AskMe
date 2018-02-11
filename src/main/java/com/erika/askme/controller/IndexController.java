@@ -6,14 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -22,7 +20,7 @@ import java.util.*;
  * @author: Erika
  * @create: 2018-02-10 13:09
  **/
-@Controller
+//@Controller
 public class IndexController {
 
     @Autowired
