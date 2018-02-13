@@ -2,11 +2,13 @@ package com.erika.askme.controller;
 
 import com.erika.askme.aspect.testaop;
 import com.erika.askme.service.UserService;
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
@@ -26,17 +28,28 @@ public class LoginController {
     private static final Logger logger= LoggerFactory.getLogger(LoginController.class) ;
 
     @RequestMapping(path={"/register/"},method = {RequestMethod.POST})
-    public String register(Model model, @RequestParam("username") String username,@RequestParam("password") String password,HttpServletResponse response)
+    public String register(Model model, @RequestParam("username") String username,@RequestParam("password") String password,HttpServletResponse response,
+                           @RequestParam(value="next",required=false) String next)
     {
         try {
             Map<String, String> map = userservice.register(username, password);
             if (map.containsKey("msg")) {
                 model.addAttribute("msg", map.get("msg"));
+                if(StringUtils.isEmpty(next));
+                else
+                {
+                    model.addAttribute("next",next);
+                }
                 return "login";
             } else {
                 Cookie cookie=new Cookie("ticket",map.get("ticket"));
                 cookie.setPath("/");
                 response.addCookie(cookie);
+                if(StringUtils.isEmpty(next));
+                else
+                {
+                    return "redirect:"+next;
+                }
                 return "redirect:/index";
             }
         }
@@ -48,17 +61,28 @@ public class LoginController {
     }
     @RequestMapping(path={"/login/"},method = {RequestMethod.POST})
     public String login(Model model, @RequestParam("username") String username, @RequestParam("password") String password,
-                        @RequestParam(value="remberme",defaultValue = "false")boolean remember, HttpServletResponse response)
+                        @RequestParam(value="remberme",defaultValue = "false")boolean remember, HttpServletResponse response,
+                        @RequestParam(value="next",required=false) String next)
     {
         try {
             Map<String, String> map = userservice.login(username, password);
             if (map.containsKey("msg")) {
                 model.addAttribute("msg", map.get("msg"));
+                if(StringUtils.isEmpty(next));
+                else
+                {
+                    model.addAttribute("next",next);
+                }
                 return "login";
             } else {
                 Cookie cookie=new Cookie("ticket",map.get("ticket"));
                 cookie.setPath("/");
                 response.addCookie(cookie);
+                if(StringUtils.isEmpty(next));
+                else
+                {
+                    return "redirect:"+next;
+                }
                 return "redirect:/index";
             }
         }
@@ -69,8 +93,9 @@ public class LoginController {
         }
     }
     @RequestMapping(path={"/reglogin"},method = {RequestMethod.GET})
-    public String reglogin()
+    public String reglogin(Model model,@RequestParam(value="next",required=false) String next)
     {
+        model.addAttribute("next",next);
         return "login";
     }
     @RequestMapping(path={"/logout/"},method = {RequestMethod.GET})

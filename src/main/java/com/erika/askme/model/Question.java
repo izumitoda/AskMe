@@ -46,13 +46,7 @@ public class Question {
         this.title = title;
     }
 
-    public int getUser_id() {
-        return user_id;
-    }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
 
     public Date getCreated_date() {
         return created_date;
@@ -67,7 +61,16 @@ public class Question {
     private int comment_count;;
     private String content;
     private String title;
-    private int user_id;
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    private int userid;
     private Date created_date;
 
 }

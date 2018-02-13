@@ -49,7 +49,7 @@ public class HomeController {
             ViewObject vo=new ViewObject();
             vo.set("question",a);
             User userr=new User();
-            userr=user.getuserbyid(a.getUser_id());
+            userr=user.getuserbyid(a.getUserid());
             String tmo=userr.getHeadUrl();
             vo.set("user",userr);
             vos.add(vo);

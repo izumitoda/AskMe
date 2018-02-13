@@ -4,6 +4,7 @@ import com.erika.askme.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -17,9 +18,12 @@ import java.util.List;
 public interface questiondao {
     String tablename="question";
     String insertfield="title,content,user_id,created_date,comment_count";
-    String selectfield="if,"+insertfield;
+    String selectfield="id,"+insertfield;
     @Insert({"INSERT INTO ",tablename,"(",insertfield,") values(#{title},#{content},#{user_id},#{created_date},#{comment_count})"})
-    void insertquestion(Question question);
+    int insertquestion(Question question);
+
+   @Select({"Select",selectfield," from ",tablename," where id=#{id}"})
+   Question selectQuestionById(@Param("id") int id);
 
     List<Question> selectLatestQuestions(@Param("userId") int userId,
                                          @Param("offset") int offset,

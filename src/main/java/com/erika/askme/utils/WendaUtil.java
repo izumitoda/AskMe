@@ -1,7 +1,10 @@
 package com.erika.askme.utils;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 import java.security.MessageDigest;
 import java.util.Map;
@@ -12,6 +15,19 @@ import java.util.Map;
 public class WendaUtil {
     private static final Logger logger = LoggerFactory.getLogger(WendaUtil.class);
 
+    public static String generatejson(int code)
+    {
+        JSONObject json=new JSONObject();
+        json.put("code",code);
+        return json.toString();
+    }
+    public static String generatejson(int code,String message)
+    {
+        JSONObject json=new JSONObject();
+        json.put("code",code);
+        json.put("msg",message);
+        return json.toString();
+    }
     public static String MD5(String key) {
         char hexDigits[] = {
                 '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
