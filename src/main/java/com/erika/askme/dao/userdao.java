@@ -20,6 +20,9 @@ public interface userdao  {
     @Select({"Select ",selectfield," from ",tablename," where id=#{id}"})
     User selectuser(int id);
 
+    @Select({"Select ",selectfield," from ",tablename," where name=#{name}"})
+    User selectname(String name);
+
     @Update({"Update ",tablename," set password=#{password} where id=#{id}"})
     void updateuser(User user);
 

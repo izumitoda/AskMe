@@ -5,7 +5,16 @@
     <sql id="table">question</sql>
     <sql id="selectFields">id, title, content, comment_count,created_date,user_id
     </sql>
-    <select id="selectLatestQuestions" resultType="com.erika.askme.model.Question">
+    <resultMap type="com.erika.askme.model.Question" id="Question">
+        <result column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="comment_count" property="comment_count"/>
+        <result column="created_date" property="created_date"/>
+        <result column="user_id" property="user_id"/>
+
+    </resultMap>
+    <select id="selectLatestQuestions" resultMap="Question">
         SELECT
         <include refid="selectFields"/>
         FROM
