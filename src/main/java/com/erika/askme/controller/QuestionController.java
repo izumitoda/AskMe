@@ -1,9 +1,10 @@
 package com.erika.askme.controller;
 
 import com.erika.askme.dao.questiondao;
-import com.erika.askme.model.HostHolder;
-import com.erika.askme.model.Question;
+import com.erika.askme.model.*;
+import com.erika.askme.service.CommentService;
 import com.erika.askme.service.QuestionService;
+import com.erika.askme.service.UserService;
 import com.erika.askme.utils.WendaUtil.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static com.erika.askme.utils.WendaUtil.MD5;
 import static com.erika.askme.utils.WendaUtil.generatejson;
@@ -31,7 +34,10 @@ public class QuestionController {
     HostHolder host;
     @Autowired
     QuestionService questiondata;
-
+    @Autowired
+    CommentService commentservice;
+    @Autowired
+    UserService userservice;
     @RequestMapping(path={"/askquestion"},method={RequestMethod.POST})
     @ResponseBody
     public String askquestion(@RequestParam("title") String title,@RequestParam("content") String content)
@@ -63,6 +69,18 @@ public class QuestionController {
     {
         if(questiondata.getQuestionByID(id)==null)
             return "redirect:/";
+        List<ViewObject> vos=new ArrayList<ViewObject>();
+        List<Comment> comment=commentservice.getCommentByEntity(id, EntityType.ENTITY_QUESTION);
+        for(Comment c:comment)
+        {
+            ViewObject vo=new ViewObject();
+            vo.set("comment",c);
+            vo.set("user",userservice.getuserbyid(c.getUserid()));
+            int k=commentservice.getCommentCount(c.getId(),EntityType.ENTITY_COMMENT);
+            vo.set("count",k);
+            vos.add(vo);
+        }
+        model.addAttribute("vos",vos);
         model.addAttribute("question",questiondata.getQuestionByID(id));
         return "detail";
     }

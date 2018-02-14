@@ -27,6 +27,10 @@ public class QuestionService {
     @Autowired
     private SensitiveService sensitive;
 
+    public void updateCommentCount(int count,int id)
+    {
+        questiondate.updateCommentCount(count,id);
+    }
     public int insertquestion(Question question)
     {
         //过滤html标签
