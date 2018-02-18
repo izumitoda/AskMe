@@ -2,7 +2,9 @@ package com.erika.askme.service;
 
 import com.erika.askme.dao.messagedao;
 import com.erika.askme.model.Message;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.List;
  * @author: Erika
  * @create: 2018-02-14 13:54
  **/
+@Service
 public class MessageService {
     @Autowired
     messagedao messagedata;
@@ -41,9 +44,21 @@ public class MessageService {
     {
         messagedata.readMessage(messageid);
     }
-    public List<Message> getConversation(int conversationid)
+    public List<Message> getConversation(String conversationid)
     {
         return messagedata.getConversation(conversationid);
+    }
+    public  List<Message> getListMessage(int id)
+    {
+        return messagedata.listmessageget(id);
+    }
+    public int getAllCountByConversationId(String conversation_id)
+    {
+        return messagedata.getAllCountByConversationId(conversation_id);
+    }
+    public int getAllUnreadCountByConversationId(String conversation_id, int myid)
+    {
+        return messagedata.getAllUnreadCountByConversationId(conversation_id,myid);
     }
 
 }

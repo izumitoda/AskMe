@@ -5,6 +5,7 @@ import com.erika.askme.model.*;
 import com.erika.askme.service.CommentService;
 import com.erika.askme.service.QuestionService;
 import com.erika.askme.service.UserService;
+import com.erika.askme.utils.WendaUtil;
 import com.erika.askme.utils.WendaUtil.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +52,7 @@ public class QuestionController {
             question.setCreated_date(new Date());
             if(host.getuser()==null)
                 question.setUserid(999);
+                //return WendaUtil.generatejson(1, "该用户不存在");
             else
                 question.setUserid(host.getuser().getId());
             questiondata.insertquestion(question);

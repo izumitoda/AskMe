@@ -101,6 +101,10 @@ public class UserService {
         ticketdata.insertticket(lgticket);
         return lgticket.getTicket();
     }
+    public User getUserByName(String name)
+    {
+        return userdate.selectname(name);
+    }
 
     public void logout(String ticket)
     {
