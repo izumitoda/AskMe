@@ -3,6 +3,7 @@ package com.erika.askme.controller;
 import com.erika.askme.dao.questiondao;
 import com.erika.askme.model.*;
 import com.erika.askme.service.CommentService;
+import com.erika.askme.service.LikeService;
 import com.erika.askme.service.QuestionService;
 import com.erika.askme.service.UserService;
 import com.erika.askme.utils.WendaUtil;
@@ -39,6 +40,9 @@ public class QuestionController {
     CommentService commentservice;
     @Autowired
     UserService userservice;
+
+    @Autowired
+    LikeService like;
     @RequestMapping(path={"/askquestion"},method={RequestMethod.POST})
     @ResponseBody
     public String askquestion(@RequestParam("title") String title,@RequestParam("content") String content)
@@ -71,6 +75,7 @@ public class QuestionController {
     {
         if(questiondata.getQuestionByID(id)==null)
             return "redirect:/";
+        User user=host.getuser();
         List<ViewObject> vos=new ArrayList<ViewObject>();
         List<Comment> comment=commentservice.getCommentByEntity(id, EntityType.ENTITY_QUESTION);
         for(Comment c:comment)
@@ -79,7 +84,12 @@ public class QuestionController {
             vo.set("comment",c);
             vo.set("user",userservice.getuserbyid(c.getUserid()));
             int k=commentservice.getCommentCount(c.getId(),EntityType.ENTITY_COMMENT);
+            if(user!=null)
+                vo.set("likeordiss",like.isLikeorDislike(EntityType.ENTITY_COMMENT,c.getId(),user.getId()));
+            else
+                vo.set("likeordiss",-1);
             vo.set("count",k);
+            vo.set("zancount",like.getCountLike(EntityType.ENTITY_COMMENT,c.getId()));
             vos.add(vo);
         }
         model.addAttribute("vos",vos);

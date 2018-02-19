@@ -26,7 +26,7 @@ public class CommentController {
     @Autowired
     HostHolder host;
     @RequestMapping(path={"/addcomment/"},method = {RequestMethod.POST})
-    @ResponseBody
+
     public String addcomment(@RequestParam("content") String content,@RequestParam("questionid") int id)
     {
         try
