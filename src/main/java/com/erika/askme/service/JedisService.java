@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.util.List;
+
 /**
  * @program: askme
  * @description:
@@ -18,6 +20,44 @@ import redis.clients.jedis.JedisPool;
 public class JedisService implements InitializingBean{
     private static final Logger logger= LoggerFactory.getLogger(JedisService.class) ;
     private JedisPool pool;
+    public long lpush(String key,String value)
+    {
+        Jedis j=null;
+        try
+        {
+            j=pool.getResource();
+            return j.lpush(key,value);
+        }
+        catch (Exception e)
+        {
+            logger.error("push失败"+e);
+        }
+        finally
+        {
+            if(j!=null)
+                j.close();
+        }
+        return 0;
+    }
+
+    public List<String> brpop(int time,String key)
+    {
+        Jedis j=null;
+        try
+        {
+            j=pool.getResource();
+            return j.brpop(time,key);
+        }
+        catch(Exception e)
+        {
+            logger.error("brpop出错"+e);
+        }
+        finally {
+            if(j!=null)
+                j.close();
+        }
+        return null;
+    }
 
     public long addkeyvalue(String key,String value)
     {

@@ -1,8 +1,13 @@
 package com.erika.askme.controller;
 
+import com.erika.askme.async.EventModel;
+import com.erika.askme.async.EventProducer;
+import com.erika.askme.async.EventType;
+import com.erika.askme.model.Comment;
 import com.erika.askme.model.EntityType;
 import com.erika.askme.model.HostHolder;
 import com.erika.askme.model.User;
+import com.erika.askme.service.CommentService;
 import com.erika.askme.service.LikeService;
 import com.erika.askme.utils.WendaUtil;
 import org.aspectj.lang.annotation.After;
@@ -27,6 +32,11 @@ public class LikeController {
     @Autowired
     LikeService like;
 
+    @Autowired
+    CommentService commentService;
+    @Autowired
+    EventProducer eventProducer;
+
     @RequestMapping(path={"/like"},method={RequestMethod.POST})
     @ResponseBody
     public String likeit(@RequestParam("commentId")int entity_id)
@@ -39,6 +49,10 @@ public class LikeController {
             like.delDislike(EntityType.ENTITY_COMMENT,entity_id,user.getId());
         }
         like.addLike(EntityType.ENTITY_COMMENT,entity_id,user.getId());
+        Comment comment=commentService.selectCommentById(entity_id);
+        eventProducer.fireEvent(new EventModel().setEntityid(entity_id).setEntitytype(EntityType.ENTITY_COMMENT)
+        .setUserid(user.getId()).setEventype(EventType.LIKE).setkeyvalue("questionid","http://127.0.0.1:8080/question/"+String.valueOf(comment.getEntityid())).setEntityownerid(comment.getUserid()));
+
         return WendaUtil.generatejson(0,String.valueOf(like.getCountLike(EntityType.ENTITY_COMMENT,entity_id)));
     }
     @RequestMapping(path={"/dislike"},method={RequestMethod.POST})

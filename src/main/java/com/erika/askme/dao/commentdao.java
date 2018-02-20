@@ -23,6 +23,7 @@ public interface commentdao {
     @Select({"Select ",selectfield, "from ",tablename," where entity_id=#{id} and entity_type=#{type} and status=0 order by created_date desc"})
     List<Comment> selectbyentity(@Param("id") int id,@Param("type") int type);
 
+
     @Select({"Select ",selectfield, "from ",tablename," where id=#{id} and status=0"})
     Comment selectbycommentid(@Param("id") int id);
 
