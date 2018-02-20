@@ -1,6 +1,9 @@
 package com.erika.askme.controller;
 
 import com.erika.askme.aspect.testaop;
+import com.erika.askme.async.EventModel;
+import com.erika.askme.async.EventProducer;
+import com.erika.askme.async.EventType;
 import com.erika.askme.service.UserService;
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
@@ -26,6 +29,9 @@ public class LoginController {
     @Autowired
     private UserService userservice;
     private static final Logger logger= LoggerFactory.getLogger(LoginController.class) ;
+
+    @Autowired
+    EventProducer eventProducer;
 
     @RequestMapping(path={"/register/"},method = {RequestMethod.POST})
     public String register(Model model, @RequestParam("username") String username,@RequestParam("password") String password,HttpServletResponse response,
@@ -78,6 +84,7 @@ public class LoginController {
                 Cookie cookie=new Cookie("ticket",map.get("ticket"));
                 cookie.setPath("/");
                 response.addCookie(cookie);
+                eventProducer.fireEvent(new EventModel().setkeyvalue("mail","15307130334@fudan.edu.cn").setUserid(userservice.getUserByName(username).getId()).setEventype(EventType.LOGIN));
                 if(StringUtils.isEmpty(next));
                 else
                 {
