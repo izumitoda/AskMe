@@ -11,7 +11,9 @@ public enum EventType {
     COMMENT(1),
     LOGIN(2),
     ASK(3),
-    Mail(4);
+    Mail(4),
+    Follow(5),
+    UnFollow(6);
 
     private int value;
     EventType(int value)

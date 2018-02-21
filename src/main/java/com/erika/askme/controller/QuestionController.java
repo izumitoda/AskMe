@@ -2,10 +2,7 @@ package com.erika.askme.controller;
 
 import com.erika.askme.dao.questiondao;
 import com.erika.askme.model.*;
-import com.erika.askme.service.CommentService;
-import com.erika.askme.service.LikeService;
-import com.erika.askme.service.QuestionService;
-import com.erika.askme.service.UserService;
+import com.erika.askme.service.*;
 import com.erika.askme.utils.WendaUtil;
 import com.erika.askme.utils.WendaUtil.*;
 import org.slf4j.Logger;
@@ -40,6 +37,9 @@ public class QuestionController {
     CommentService commentservice;
     @Autowired
     UserService userservice;
+
+    @Autowired
+    FollowService followService;
 
     @Autowired
     LikeService like;
@@ -94,6 +94,7 @@ public class QuestionController {
         }
         model.addAttribute("vos",vos);
         model.addAttribute("question",questiondata.getQuestionByID(id));
+        model.addAttribute("followercount",followService.getFansCount(EntityType.ENTITY_QUESTION,id));
         return "detail";
     }
 

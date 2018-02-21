@@ -27,6 +27,11 @@ public class QuestionService {
     @Autowired
     private SensitiveService sensitive;
 
+    public int getQuestionCountByUserID(int id)
+    {
+        return questiondate.getQuestionCountByUserId(id);
+    }
+
     public void updateCommentCount(int count,int id)
     {
         questiondate.updateCommentCount(count,id);

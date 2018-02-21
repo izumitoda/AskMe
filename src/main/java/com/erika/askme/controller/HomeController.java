@@ -1,8 +1,10 @@
 package com.erika.askme.controller;
 
+import com.erika.askme.model.EntityType;
 import com.erika.askme.model.Question;
 import com.erika.askme.model.User;
 import com.erika.askme.model.ViewObject;
+import com.erika.askme.service.FollowService;
 import com.erika.askme.service.QuestionService;
 import com.erika.askme.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ public class HomeController {
     QuestionService question;
     @Autowired
     UserService user;
+    @Autowired
+    FollowService followService;
 
     @RequestMapping(path={"/user/{userid}"})
     public String getuserquestion(Model model, @PathVariable("userid") int userid)
@@ -52,6 +56,7 @@ public class HomeController {
             userr=user.getuserbyid(a.getUserid());
             String tmo=userr.getHeadUrl();
             vo.set("user",userr);
+            vo.set("followercount",followService.getFansCount(EntityType.ENTITY_QUESTION,a.getId()));
             vos.add(vo);
         }
         return vos;

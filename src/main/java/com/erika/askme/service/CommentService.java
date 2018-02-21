@@ -48,7 +48,10 @@ public class CommentService {
         }
         return commentdata.insertcomment(comment);
     }
-
+    public int getCommentCountByUserID(int id)
+    {
+        return commentdata.getCommentCountByUserId(id);
+    }
     public Comment selectCommentById(int id)
     {
         return commentdata.selectbycommentid(id);

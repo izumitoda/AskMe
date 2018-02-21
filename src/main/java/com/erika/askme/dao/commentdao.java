@@ -1,6 +1,7 @@
 package com.erika.askme.dao;
 
 import com.erika.askme.model.Comment;
+import com.erika.askme.model.Question;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -30,9 +31,13 @@ public interface commentdao {
     @Select({"SELECT count(id) from ",tablename," where entity_id=#{id} and entity_type=#{type} and status=0"})
     int getCommentCount(@Param("id")int id,@Param("type")int type);
 
+    @Select({"SELECT count(*) from ",tablename," where user_id=#{userid}"})
+    int getCommentCountByUserId(@Param("userid") int id);
+
     @Select({"Select ",selectfield, "from ",tablename," where user_id=#{user_id} and staus=0 order by created_date desc " })
     List<Comment> selectbyuser(@Param("user_id") int user_id);
 
     @Update({"Update ",tablename," set status=#{status} where id=#{id}"})
     void deletecomment(@Param("status") int status,@Param("id") int id);
 }
+

@@ -25,4 +25,12 @@ public class RedisKeyUtil {
     {
         return eventKey;
     }
+    public String getWhoIFollowListKey(int user_id,int entity_type)
+    {
+        return String.valueOf(user_id)+"'s-Follow-List"+String.valueOf(entity_type);
+    }
+    public String getWhoFollowedMeList(int entity_id,int entity_type)
+    {
+        return String.valueOf(entity_id)+"-"+String.valueOf(entity_type)+"-Fans-List";
+    }
 }

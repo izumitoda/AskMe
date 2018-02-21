@@ -22,6 +22,9 @@ public interface questiondao {
    @Select({"Select",selectfield," from ",tablename," where id=#{id}"})
    Question selectQuestionById(@Param("id") int id);
 
+    @Select({"Select count(id) from ",tablename," where user_id=#{id}"})
+    int getQuestionCountByUserId(@Param("id") int id);
+
    @Update(("Update question set comment_count=#{count} where id=#{id}"))
    void updateCommentCount(@Param("count") int count,@Param("id")int id);
     List<Question> selectLatestQuestions(@Param("userId") int userId,
