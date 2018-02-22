@@ -1,8 +1,10 @@
 (function (window, undefined) {
     var Action = Base.createClass('main.util.Action');
+    var Business = Base.getClass('main.util.Business');
 
     Base.ready({
         initialize: fInitialize,
+
         // 事件代理
         events: {
             'click .js-like': fVote,
@@ -12,6 +14,11 @@
 
     function fInitialize() {
         var that = this;
+        // 点击关注问题
+        Business.followQuestion({
+            countEl: $('.js-user-count'),
+            listEl: $('.js-user-list')
+        });
     }
 
     function fVote(oEvent) {

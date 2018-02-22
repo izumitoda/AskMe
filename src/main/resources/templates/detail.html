@@ -67,7 +67,11 @@
                 </div>
                 <div class="zm-side-section">
                     <div class="zm-side-section-inner" id="zh-question-side-header-wrap">
-                        <button data-follow="q:m:button" class="follow-button zg-follow zg-btn-green" data-id="6727688">关注问题</button>
+                        <#if followed>
+                        <button data-follow="q:m:button" class="follow-button zg-follow zg-btn-green js-follow-question" data-id="${question.id}" data-status="1">取消关注</button>
+                        <#else>
+                        <button data-follow="q:m:button" class="follow-button zg-follow zg-btn-green js-follow-question" data-id="${question.id}" data-status="0">关注问题</button>
+                    </#if>
                         <div class="zg-btn-white goog-inline-block goog-menu-button" id="zh-question-operation-menu" role="button" aria-expanded="false" tabindex="0" aria-haspopup="true" style="-webkit-user-select: none;">
                             <div class="goog-inline-block goog-menu-button-outer-box">
                                 <div class="goog-inline-block goog-menu-button-inner-box">
@@ -86,12 +90,14 @@
                         <div class="zh-question-followers-sidebar">
                             <div class="zg-gray-normal">
                                 <a href="">
-                                    <strong>${followercount}</strong></a>人关注该问题</div>
-                            <div class="list zu-small-avatar-list zg-clear">
-                                <span class="zm-item-link-avatar">
-                                    <img title="匿名用户" class="zm-item-img-avatar" src="../images/res/aadd7b895_s.jpg"></span>
-
-
+                                    <strong class="js-user-count">${followercount}</strong></a>人关注该问题</div>
+                            <div class="list zu-small-avatar-list zg-clear js-user-list">
+                                <#list followusers as vo>
+                                <a class="zm-item-link-avatar js-user-${vo.id}" href="/user/${vo.id}"
+                                   data-original_title="${vo.name}">
+                                    <img src="${vo.getHeadUrl()}"
+                                         class="zm-item-img-avatar"></a>
+                                </#list>
                             </div>
                         </div>
                     </div>
@@ -284,12 +290,13 @@
     <script type="text/javascript" src="/scripts/main/base/base.js"></script>
     <script type="text/javascript" src="/scripts/main/base/util.js"></script>
     <script type="text/javascript" src="/scripts/main/base/event.js"></script>
+    <script type="text/javascript" src="/scripts/main/util/action.js"></script>
+    <script type="text/javascript" src="/scripts/main/util/business.js"></script>
     <script type="text/javascript" src="/scripts/main/component/component.js"></script>
     <script type="text/javascript" src="/scripts/main/component/popup.js"></script>
     <script type="text/javascript" src="/scripts/main/component/popupAdd.js"></script>
     <script type="text/javascript" src="/scripts/main/component/popupMsg.js"></script>
     <script type="text/javascript" src="/scripts/main/site/home.js"></script>
     <script type="text/javascript" src="/scripts/main/site/detail.js"></script>
-    <script type="text/javascript" src="/scripts/main/util/action.js"></script>
 </body>
 </html>

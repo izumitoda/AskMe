@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -76,8 +77,18 @@ public class QuestionController {
         if(questiondata.getQuestionByID(id)==null)
             return "redirect:/";
         User user=host.getuser();
+        if(user==null)
+            return "redirect:/reglogin?next=/question/"+String.valueOf(id);
         List<ViewObject> vos=new ArrayList<ViewObject>();
         List<Comment> comment=commentservice.getCommentByEntity(id, EntityType.ENTITY_QUESTION);
+        List<User> followuser=new ArrayList<User>();
+        List<Integer> get=followService.getFollowers(EntityType.ENTITY_QUESTION,id,0,20);
+        for(Integer a:get)
+        {
+            followuser.add(userservice.getuserbyid(a));
+        }
+        model.addAttribute("followusers",followuser);
+        model.addAttribute("followed",followService.isFollowRelationship(EntityType.ENTITY_QUESTION,id,user.getId()));
         for(Comment c:comment)
         {
             ViewObject vo=new ViewObject();

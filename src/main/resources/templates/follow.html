@@ -113,9 +113,9 @@
                         <div class="zm-profile-card zm-profile-section-item zg-clear no-hovercard">
                             <div class="zg-right">
                                 <#if vo.followed>
-                                <button class="zg-btn zg-btn-unfollow zm-rich-follow-btn small nth-0">取消关注</button>
+                                <button class="zg-btn zg-btn-unfollow zm-rich-follow-btn small nth-0 js-follow-user" data-id="${vo.user.id}" data-status="1">取消关注</button>
                                 <#else>
-                                <button class="zg-btn zg-btn-follow zm-rich-follow-btn small nth-0">关注他</button>
+                                <button class="zg-btn zg-btn-follow zm-rich-follow-btn small nth-0 js-follow-user" data-id="${vo.user.id}" data-status="0">关注他</button>
                             </#if>
                             </div>
                             <a title="Barty" class="zm-item-link-avatar" href="/people/buaabarty">
@@ -164,6 +164,17 @@
         <span class="copy">© 2016 牛客</span>
     </div>
 </div>
-
+<script type="text/javascript" src="/scripts/main/jquery.js"></script>
+<script type="text/javascript" src="/scripts/main/base/base.js"></script>
+<script type="text/javascript" src="/scripts/main/base/util.js"></script>
+<script type="text/javascript" src="/scripts/main/base/event.js"></script>
+<script type="text/javascript" src="/scripts/main/util/action.js"></script>
+<script type="text/javascript" src="/scripts/main/util/business.js"></script>
+<script type="text/javascript" src="/scripts/main/component/component.js"></script>
+<script type="text/javascript" src="/scripts/main/component/popup.js"></script>
+<script type="text/javascript" src="/scripts/main/component/popupAdd.js"></script>
+<script type="text/javascript" src="/scripts/main/component/popupMsg.js"></script>
+<script type="text/javascript" src="/scripts/main/site/home.js"></script>
+<script type="text/javascript" src="/scripts/main/site/follow.js"></script>
 </body>
 </html>

@@ -55,4 +55,12 @@ public class WendaUtil {
             return null;
         }
     }
+    public static String getJSONString(int code, Map<String, Object> map) {
+        com.alibaba.fastjson.JSONObject json = new com.alibaba.fastjson.JSONObject();
+        json.put("code", code);
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            json.put(entry.getKey(), entry.getValue());
+        }
+        return json.toJSONString();
+    }
 }
