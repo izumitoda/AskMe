@@ -57,6 +57,7 @@ public class LoginController {
                 Cookie cookie=new Cookie("ticket",map.get("ticket"));
                 cookie.setPath("/");
                 response.addCookie(cookie);
+                eventProducer.fireEvent(new EventModel().setUserid(userservice.getUserByName(username).getId()).setEventype(EventType.Register).setkeyvalue("mail","15307130334@fudan.edu.cn"));
                 if(StringUtils.isEmpty(next));
                 else
                 {

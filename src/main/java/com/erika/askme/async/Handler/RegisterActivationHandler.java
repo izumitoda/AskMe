@@ -21,7 +21,7 @@ import java.util.Map;
  * @create: 2018-02-20 21:53
  **/
 @Component
-public class LoginExceptionHandler implements EventHandler{
+public class RegisterActivationHandler implements EventHandler{
 
     @Autowired
     SendMails sendMails;
@@ -33,12 +33,13 @@ public class LoginExceptionHandler implements EventHandler{
     public void doHandle(EventModel event) {
         Map<String,Object> map=new HashMap<String,Object>();
         map.put("username",userService.getuserbyid(event.getUserid()).getName());
-        sendMails.sendWithHTMLTemplate(event.getkeyvalue("mail"),"用户登录异常","/src/main/resources/templates/mails/LoginException.html",map);
+        map.put("activationurl","http://192.168.1.104:8080/activation/"+userService.getuserbyid(event.getUserid()).getCode()+"/"+String.valueOf(event.getUserid()));
+        sendMails.sendWithHTMLTemplate(event.getkeyvalue("mail"),"请点击链接激活您的AskMe账号","/src/main/resources/templates/mails/RegisterActivation.html",map);
 
     }
 
     @Override
     public List<EventType> getSupportEventType() {
-        return Arrays.asList(EventType.LOGIN);
+        return Arrays.asList(EventType.Register);
     }
 }

@@ -36,8 +36,7 @@
                     <i class="zg-icon zg-icon-feedlist"></i>最新动态
                     <input type="hidden" id="is-topstory">
                     <span class="zg-right zm-noti-cleaner-setting" style="list-style:none">
-                        <a href="https://nowcoder.com/settings/filter" class="zg-link-gray-normal">
-                            <i class="zg-icon zg-icon-settings"></i>设置</a></span>
+
                 </div>
                 <div class="zu-main-feed-con navigable" data-feedtype="topstory" id="zh-question-list" data-widget="navigable" data-navigable-options="{&quot;items&quot;:&quot;&gt; .zh-general-list .feed-content&quot;,&quot;offsetTop&quot;:-82}">
                     <a href="javascript:;" class="zu-main-feed-fresh-button" id="zh-main-feed-fresh-button" style="display:none"></a>
@@ -48,7 +47,7 @@
                             <meta itemprop="ZReactor" data-id="113477" data-meta="{&quot;source_type&quot;: &quot;promotion_article&quot;, &quot;voteups&quot;: 1082, &quot;comments&quot;: 100, &quot;source&quot;: []}">
                             <div class="feed-item-inner">
                                 <div class="avatar">
-                                    <a title="${vo.user.name}" data-tip="p$t$zhao-yong-feng" class="zm-item-link-avatar" target="_blank" href="https://nowcoder.com/people/zhao-yong-feng">
+                                    <a title="${vo.user.name}" data-tip="p$t$zhao-yong-feng" class="zm-item-link-avatar" target="_blank" href="/user/${vo.user.id}">
                                         <img src="${vo.user.getHeadUrl()}" class="zm-item-img-avatar"></a>
                                 </div>
                                 <div class="feed-main">
@@ -91,7 +90,7 @@
                                             <div class="zm-item-meta meta clearfix js-contentActions">
                                                 <div class="zm-meta-panel">
 
-                                                    <a href="#" class="meta-item toggle-comment js-toggleCommentBox">
+                                                    <a href="/question/${vo.question.id}" class="meta-item toggle-comment js-toggleCommentBox">
                                                         <i class="z-icon-comment"></i>${vo.question.comment_count}条评论</a>
                                                     <a href="#" class="meta-item zu-autohide js-share goog-inline-block goog-menu-button" role="button" aria-expanded="false" tabindex="0" aria-haspopup="true" style="-webkit-user-select: none;">
                                                         <div class="goog-inline-block goog-menu-button-outer-box">

@@ -13,7 +13,8 @@ public enum EventType {
     ASK(3),
     Mail(4),
     Follow(5),
-    UnFollow(6);
+    UnFollow(6),
+    Register(7);
 
     private int value;
     EventType(int value)

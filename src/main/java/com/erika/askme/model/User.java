@@ -67,4 +67,23 @@ public class User {
         this.name = name;
     }
 
+    public int getActivation() {
+        return activation;
+    }
+
+    public void setActivation(int activation) {
+        this.activation = activation;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    private int activation;
+    private String code;
+
 }

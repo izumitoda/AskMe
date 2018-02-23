@@ -36,8 +36,7 @@
                     <i class="zg-icon zg-icon-feedlist"></i>最新动态
                     <input type="hidden" id="is-topstory">
                     <span class="zg-right zm-noti-cleaner-setting" style="list-style:none">
-                        <a href="https://nowcoder.com/settings/filter" class="zg-link-gray-normal">
-                            <i class="zg-icon zg-icon-settings"></i>设置</a></span>
+
                 </div>
                 <div class="zu-main-feed-con navigable" data-feedtype="topstory" id="zh-question-list" data-widget="navigable" data-navigable-options="{&quot;items&quot;:&quot;&gt; .zh-general-list .feed-content&quot;,&quot;offsetTop&quot;:-82}">
                     <a href="javascript:;" class="zu-main-feed-fresh-button" id="zh-main-feed-fresh-button" style="display:none"></a>
@@ -57,10 +56,11 @@
                                         <meta itemprop="answer-url-token" content="13174385">
                                         <div class="expandable entry-body">
                                             <div class="zm-item-answer-author-info">
-                                                <a class="author-link" data-tip="p$b$amuro1230" target="_blank" href="/user/$!{vo.userid}">${vo.username}</a>
+                                                <a class="author-link" data-tip="p$b$amuro1230" target="_blank" href="/user/${vo.userid}">${vo.username}</a>
                                                 评论了该问题 ，${vo.createddate?string("yyyy年MM月dd日 HH:mm:ss")}</div>
                                             <div class="zm-item-rich-text expandable js-collapse-body" data-resourceid="123114" data-action="/answer/content" data-author-name="李淼" data-entry-url="/question/19857995/answer/13174385">
-                                                <div class="zh-summary summary clearfix">${vo.questiontitle}</div>
+                                                <a href="/question/${vo.questionid}">
+                                                <div class="zh-summary summary clearfix">${vo.questiontitle}</div></a>
                                             </div>
                                         </div>
                                     </div>

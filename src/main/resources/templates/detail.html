@@ -72,15 +72,7 @@
                         <#else>
                         <button data-follow="q:m:button" class="follow-button zg-follow zg-btn-green js-follow-question" data-id="${question.id}" data-status="0">关注问题</button>
                     </#if>
-                        <div class="zg-btn-white goog-inline-block goog-menu-button" id="zh-question-operation-menu" role="button" aria-expanded="false" tabindex="0" aria-haspopup="true" style="-webkit-user-select: none;">
-                            <div class="goog-inline-block goog-menu-button-outer-box">
-                                <div class="goog-inline-block goog-menu-button-inner-box">
-                                    <div class="goog-inline-block goog-menu-button-caption">
-                                        <i class="zg-icon-dropdown-menu zg-icon"></i>
-                                        <b class="hide-text">设置</b></div>
-                                    <div class="goog-inline-block goog-menu-button-dropdown">&nbsp;</div></div>
-                            </div>
-                        </div>
+
                         <div class="goog-menu goog-menu-vertical" role="menu" aria-haspopup="true" style="-webkit-user-select: none; visibility: visible; left: 92px; top: 33px; display: none;">
                             <div class="goog-menuitem" role="menuitem" id=":8" style="-webkit-user-select: none;">
                                 <div class="goog-menuitem-content" style="-webkit-user-select: none;">使用匿名身份</div></div>
@@ -129,9 +121,9 @@
                         </div>
                         <div class="answer-head">
                             <div class="zm-item-answer-author-info">
-                                <a class="zm-item-link-avatar avatar-link" href="" target="_blank" data-tip="p$t$yingxiaodao">
+                                <a class="zm-item-link-avatar avatar-link" href="/user/${vo.user.id}" target="_blank" data-tip="p$t$yingxiaodao">
                                     <img src="${vo.user.getHeadUrl()}" class="zm-list-avatar avatar"></a>
-                                <a class="author-link" data-tip="p$t$yingxiaodao" target="_blank" href="">${vo.user.name}</a>
+                                <a class="author-link" data-tip="p$t$yingxiaodao" target="_blank" href="/user/${vo.user.id}">${vo.user.name}</a>
 
                             <div class="zm-item-vote-info" data-votecount="28" data-za-module="VoteInfo">
                                 <span class="voters text">

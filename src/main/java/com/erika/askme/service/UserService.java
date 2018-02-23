@@ -20,7 +20,8 @@ import static com.erika.askme.utils.WendaUtil.MD5;
  * @create: 2018-02-11 23:48
  **/
 @Service
-public class UserService {
+public class
+UserService {
     @Autowired
     private userdao userdate;
     @Autowired
@@ -38,6 +39,7 @@ public class UserService {
 
             return map;
         }
+
         if(StringUtils.isEmpty(password))
         {
             map.put("msg","密码不能为空");
@@ -49,12 +51,17 @@ public class UserService {
             map.put("msg","该用户名不存在");
             return map;
         }
+
         User user=userdate.selectname(name);
         if(!((MD5(password+user.getSalt())).equals(user.getPassword())))
         {
             map.put("msg","密码错误");
             return map;
-        }
+        } if(getUserByName(name).getActivation()==0)
+    {
+        map.put("msg","请登录邮箱激活");
+        return map;
+    }
         map.put("ticket",addticket(user.getId()));
         return map;
     }
@@ -67,6 +74,7 @@ public class UserService {
 
             return map;
         }
+
         if(StringUtils.isEmpty(password))
         {
             map.put("msg","密码不能为空");
@@ -84,9 +92,16 @@ public class UserService {
         user.setSalt(UUID.randomUUID().toString().substring(0,5));
         user.setHeadUrl(String.format("http://images.nowcoder.com/head/%dt.png",new Random().nextInt(1000)));
         user.setPassword(MD5(password+user.getSalt()));
+        user.setActivation(0);
+        user.setCode(UUID.randomUUID().toString().replaceAll("-","").substring(0,15));
         userdate.insertuser(user);
         map.put("ticket",addticket(user.getId()));
         return map;
+    }
+
+    public void updateActivation(int id)
+    {
+        userdate.updateActivation(id);
     }
 
     public String addticket(int user_id)

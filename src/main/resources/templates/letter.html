@@ -29,14 +29,11 @@
             <ul class="letter-list">
                 <#list vos as vo>
                 <li id="conversation-item-10005_622873">
-                    <a class="letter-link" href="msg-list?conversationId=10005_622873&amp;updateRead=1&amp;msgType=1"></a>
+
                     <div class="letter-info">
                         <span class="l-time">${vo.msg.createddate?string("yyyy年MM月dd日 HH:mm:ss")}</span>
                         <div class="l-operate-bar">
-                            <a href="javascript:void(0);" class="sns-action-del" data-id="10005_622873">
-                            删除
-                            </a>
-                            <a href="msg-list?conversationId=10005_622873&amp;updateRead=1&amp;msgType=1">
+                            <a href="/msg/conversation?conversation=${vo.msg.conversationid}">
                                 共${vo.readcount}条会话
                             </a>
                         </div>
@@ -49,7 +46,7 @@
                             ${vo.unreadcount}
                         </span>
                         </#if>
-                        <a class="list-head">
+                        <a class="list-head" href="/user/${vo.another.id}">
                             <img alt="头像" src="${vo.another.getHeadUrl()}">
                         </a>
 
@@ -59,9 +56,9 @@
                             <b>${vo.another.name}</b>
                         </a>
                         <p class="letter-brief">
-                            <a href="msg-list?conversationId=10005_622873&amp;updateRead=1&amp;msgType=1">
+
                                 ${vo.msg.content}
-                            </a>
+
                         </p>
                     </div>
                 </li>
@@ -112,24 +109,6 @@
         </script>
     </div>
     <div id="zh-footer" class="zh-footer">
-<div class="content zg-wrap clearfix">
-<ul>
-
-<li><a href="https://liukanshan.zhihu.com" target="_blank">刘看山</a></li>
-
-<li><a href="/question/19581624" target="_blank">牛客指南</a></li>
-<li><a href="javascript:;" id="js-feedback-button">建议反馈</a></li>
-
-<li><a href="/app" target="_blank">移动应用</a></li>
-<li><a href="/careers">加入牛客</a></li>
-<li><a href="/terms" target="_blank">牛客协议</a></li>
-<li><a href="/contact">联系我们</a></li>
-
-</ul>
-
-<span class="copy">© 2016 牛客</span>
-
-</div>
 </div>
 
   <div id="quick-download">

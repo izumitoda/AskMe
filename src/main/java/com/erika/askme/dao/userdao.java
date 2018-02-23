@@ -12,9 +12,9 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface userdao  {
     String tablename="user";
-    String insertfield="name,password,salt,head_url";
+    String insertfield="name,password,salt,head_url,activation,code";
     String selectfield="id,"+insertfield;
-    @Insert({"INSERT INTO ",tablename,"("+insertfield+") Values(#{name},#{password},#{salt},#{head_url})"})
+    @Insert({"INSERT INTO ",tablename,"("+insertfield+") Values(#{name},#{password},#{salt},#{head_url},#{activation},#{code})"})
     int insertuser(User user);
 
     @Select({"Select ",selectfield," from ",tablename," where id=#{id}"})
@@ -25,6 +25,9 @@ public interface userdao  {
 
     @Update({"Update ",tablename," set password=#{password} where id=#{id}"})
     void updateuser(User user);
+
+    @Update({"Update ",tablename," set activation=1 where id=#{id}"})
+    void updateActivation(int id);
 
     @Delete({"Delete from ",tablename," where id=#{id}"})
     void deleteuser(int id);

@@ -120,6 +120,7 @@ public class FollowController {
     @RequestMapping(value = "/followee/{user}", method = {RequestMethod.GET})
     public String getFolloweeList(@PathVariable("user")int userid, Model model) {
         model.addAttribute("name",userService.getuserbyid(userid).getName());
+        model.addAttribute("userid",userid);
         model.addAttribute("FolloweeCount",followService.getFolloweeCount(EntityType.ENTITY_USER,userid));
         model.addAttribute("type",0);
         User user = hostHolder.getuser();
@@ -148,6 +149,7 @@ public class FollowController {
         model.addAttribute("name",userService.getuserbyid(userid).getName());
         model.addAttribute("FolloweeCount",followService.getFansCount(EntityType.ENTITY_USER,userid));
         model.addAttribute("type",1);
+        model.addAttribute("userid",userid);
         User user = hostHolder.getuser();
         if (user == null)
             return "redirect:/reglogin";
