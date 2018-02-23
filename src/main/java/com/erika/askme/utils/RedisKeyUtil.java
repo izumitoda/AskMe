@@ -33,4 +33,8 @@ public class RedisKeyUtil {
     {
         return String.valueOf(entity_id)+"-"+String.valueOf(entity_type)+"-Fans-List";
     }
+    public String getTimelineKey(int user_id)
+    {
+        return "TIMELINE-"+String.valueOf(user_id);
+    }
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.erika.askme.dao.feeddao">
+    <sql id="table">feed</sql>
+    <sql id="selectFields">id, type,user_id,created_date,data
+    </sql>
+    <resultMap type="com.erika.askme.model.Feed" id="Feed">
+        <result column="id" property="id"/>
+        <result column="type" property="type"/>
+        <result column="user_id" property="userid"/>
+        <result column="created_date" property="createddate"/>
+        <result column="data" property="data"/>
+
+    </resultMap>
+    <select id="selectFeedsByUserList" resultMap="Feed">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        <include refid="table"/>
+        WHERE id &lt; #{maxId}
+        <if test="userIds.size() != 0">
+            AND user_id IN
+            <foreach collection="userIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+
+        </if>
+        ORDER BY id DESC
+        LIMIT #{count}
+    </select>
+</mapper>

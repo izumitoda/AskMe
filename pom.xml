@@ -6,7 +6,7 @@
 	<groupId>com.erika</groupId>
 	<artifactId>askme</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>askme</name>
 	<description>It&#39;s a project like zhihu</description>
@@ -123,6 +123,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
 </project>

@@ -47,6 +47,7 @@ public class FollowController {
     @Autowired
     EventProducer eventProducer;
 
+
     @RequestMapping(value = {"/followuser"}, method = {RequestMethod.POST})
     @ResponseBody
     public String followUser(@RequestParam("userId") int user_id) {
@@ -132,7 +133,6 @@ public class FollowController {
             User userr = userService.getuserbyid(a);
             vo.set("user", userr);
             vo.set("fans",followService.getFansCount(EntityType.ENTITY_USER,userr.getId()));
-            System.out.println(userr.getName());
             vo.set("followee",followService.getFolloweeCount(EntityType.ENTITY_USER,userr.getId()));
             vo.set("followed",followService.isFollowRelationship(EntityType.ENTITY_USER,userr.getId(),user.getId()));
             vo.set("ask",questionService.getQuestionCountByUserID(userr.getId()));

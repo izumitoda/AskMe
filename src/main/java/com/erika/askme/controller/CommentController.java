@@ -1,9 +1,14 @@
 package com.erika.askme.controller;
 
+import com.erika.askme.async.EventModel;
+import com.erika.askme.async.EventProducer;
+import com.erika.askme.async.EventType;
 import com.erika.askme.model.Comment;
 import com.erika.askme.model.EntityType;
 import com.erika.askme.model.HostHolder;
+import com.erika.askme.model.Question;
 import com.erika.askme.service.CommentService;
+import com.erika.askme.service.QuestionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +30,13 @@ public class CommentController {
     CommentService commentservice;
     @Autowired
     HostHolder host;
+
+    @Autowired
+    EventProducer eventProducer;
+
+    @Autowired
+    QuestionService questionService;
+
     @RequestMapping(path={"/addcomment/"},method = {RequestMethod.POST})
 
     public String addcomment(@RequestParam("content") String content,@RequestParam("questionid") int id)
@@ -42,6 +54,8 @@ public class CommentController {
             comment.setEntityid(id);
             comment.setEntitytype(EntityType.ENTITY_QUESTION);
             commentservice.insertComment(comment);
+            eventProducer.fireEvent(new EventModel().setEntityid(id).setEntitytype(EntityType.ENTITY_QUESTION).setUserid(comment.getUserid()).setEventype(EventType.COMMENT).setEntityownerid(questionService.getQuestionByID(id).getUserid()));
+
             return "redirect:/question/"+String.valueOf(id);
         }
         catch(Exception e)

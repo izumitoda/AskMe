@@ -21,6 +21,24 @@ import java.util.List;
 public class JedisService implements InitializingBean{
     private static final Logger logger= LoggerFactory.getLogger(JedisService.class) ;
     private JedisPool pool;
+    public List<String> lrange(String key,int start,int end)
+    {
+        Jedis j=null;
+        try
+        {
+            j=pool.getResource();
+            return j.lrange(key,start,end);
+        }
+        catch(Exception e)
+        {
+            logger.error("lrange异常"+e);
+        }
+        finally {
+            if(j!=null)
+                j.close();
+        }
+        return null;
+    }
     public long lpush(String key,String value)
     {
         Jedis j=null;
